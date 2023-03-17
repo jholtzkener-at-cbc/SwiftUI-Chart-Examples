@@ -6,16 +6,32 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ContentView: View {
+    @State private var selectedTab: ChartTab = .pickerBar
+    
+    enum ChartTab {
+        case pickerBar
+        case stackedBar
+        case line
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $selectedTab) {
+            PickerBar()
+                .tabItem { Text("Monthly")}
+            
+            StackedBar()
+                .tabItem { Text("Combined")}
+            
+            LineChart()
+                .tabItem { Text("Line")}
+            
+            RangedChart()
+                .tabItem { Text("Ranged")}
         }
-        .padding()
+        
     }
 }
 
@@ -24,3 +40,8 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+
+
+
